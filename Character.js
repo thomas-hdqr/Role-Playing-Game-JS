@@ -6,7 +6,7 @@ function Character(data) {
     this.getDiceHtml = function(diceCount) {
         return getDiceRollArray(diceCount).map(function(num){ 
             return  `<div class="dice">${num}</div>`
-        }).join(''
+        }).join('')
     }
 
     this.getCharacterHtml = function () {
