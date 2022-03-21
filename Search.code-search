@@ -1,0 +1,36 @@
+# Query: orc
+# ContextLines: 1
+
+11 results - 2 files
+
+data.js:
+   8      },
+   9:     orc: {
+  10:         name: "Orc",
+  11:         avatar: "images/orc.png",
+  12          health: 30,
+
+index.js:
+   3  
+   4: let monstersArray = ["orc", "demon", "goblin"];
+   5  
+
+  15      wizard.getDiceHtml()
+  16:     monster.getDiceHtml()
+  17:     wizard.takeDamage(monster.currentDiceScore)
+  18:     monster.takeDamage(wizard.currentDiceScore)
+  19      render()
+  20      
+  21:         if(wizard.dead || monster.dead){
+  22              endGame()
+
+  26  function endGame() {
+  27:     const endMessage = wizard.health === 0 && monster.health === 0 ?
+  28          "No victors - all creatures are dead" :
+  29          wizard.health > 0 ? "The Wizard Wins" :
+  30:             "The Orc is Victorious"
+  31  
+
+  45      document.getElementById('hero').innerHTML = wizard.getCharacterHtml()
+  46:     document.getElementById('monster').innerHTML = monster.getCharacterHtml()
+  47  }
