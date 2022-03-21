@@ -3,6 +3,9 @@ import Character from './Character.js'
 
 let monstersArray = ["orc", "demon", "goblin"];
 
+let isWaiting = false
+
+
 
 function getNewMonster() {
     const nextMonsterData = characterData[monstersArray.shift()]
@@ -12,8 +15,9 @@ function getNewMonster() {
 }
 
 function attack() {
-    wizard.getDiceHtml()
-    monster.getDiceHtml()
+    if (!isWaiting) {
+    wizard.setDiceHtml()
+    monster.setDiceHtml()
     wizard.takeDamage(monster.currentDiceScore)
     monster.takeDamage(wizard.currentDiceScore)
     render()
@@ -21,23 +25,27 @@ function attack() {
         if(wizard.dead){
             endGame()
         } else if (monster.dead) {
+            isWaiting = true
             if (monstersArray.length > 0)
                 setTimeout(()=> 
                 {
                 monster = getNewMonster()
                 render()
+                isWaiting = false
             }, 1500) 
             else {
                 setTimeout(()=> endGame(), 1500)
             }
         } 
+    } 
 }
 
 function endGame() {
+    isWaiting = true
     const endMessage = wizard.health === 0 && monster.health === 0 ?
         "No victors - all creatures are dead" :
         wizard.health > 0 ? "The Wizard Wins" :
-            "The Orc is Victorious"
+            "The monsters are Victorious"
 
     const endEmoji = wizard.health > 0 ? "🔮" : "☠️"
     setTimeout(()=> {
